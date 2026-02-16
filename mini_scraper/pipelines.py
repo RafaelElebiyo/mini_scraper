@@ -1,27 +1,20 @@
-import json
 import os
+from mini_scraper.utils import get_local_path
 
-class JsonWriterPipeline:
-
-    def open_spider(self, spider):
-        # Construimos la ruta absoluta al archivo data/data.json
-        os.makedirs("data", exist_ok=True)
-        self.file_path = os.path.join("data", "data.json")
-        self.file = open(self.file_path, "w", encoding="utf-8")
-        self.file.write("[\n")  # inicio del array JSON
-        self.first_item = True
-
-    def close_spider(self, spider):
-        self.file.write("\n]")  # cierre del array JSON
-        self.file.close()
+class SaveFilePipeline:
 
     def process_item(self, item, spider):
-        # Añadimos coma entre items, excepto antes del primero
-        if not self.first_item:
-            self.file.write(",\n")
-        else:
-            self.first_item = False
+        try:
+            url = item["url"]
+            body = item["body"]
+            base_folder = spider.settings.get("DATA_FOLDER")
 
-        line = json.dumps(dict(item), ensure_ascii=False)
-        self.file.write(line)
+            file_path = get_local_path(base_folder, url)
+
+            with open(file_path, "wb") as f:
+                f.write(body)
+
+        except Exception as e:
+            spider.logger.error(f"Error saving file: {e}")
+
         return item

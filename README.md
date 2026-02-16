@@ -84,16 +84,15 @@ START_URL=https://quotes.toscrape.com/
 
 You can replace it with:
 ```
-https://www.amazon.com/s?k=laptop
+https://www.amazon.com/
 https://example.com
-https://your-local-store.com
 ```
 
 ▶️ Run the scraper
 
 Inside the virtual environment:
 
-`scrapy crawl products`
+`scrapy crawl first`
 
 📂 Output
 

@@ -1,5 +1,7 @@
 scrapy==2.11.2
 scrapy-playwright==0.0.33
 playwright==1.43.0
-python-dotenv==1.0.1
-playwright-stealth
+beautifulsoup4
+lxml
+readability-lxml
+python-dotenv

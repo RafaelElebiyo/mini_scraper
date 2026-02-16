@@ -4,6 +4,6 @@ cd "$(dirname "$0")"
 
 source venv/bin/activate
 
-scrapy crawl products
+scrapy crawl first
 
 deactivate
